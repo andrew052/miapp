@@ -1,20 +1,23 @@
 package com.andrew052.miapp
 
+import kotlin.random.Random
+
 class Nequi {
-    private val celular = "1234567890" // Número de celular predefinido (ejemplo)
-    private val clave = "1234" // Clave de acceso predefinida (ejemplo)
-    private var saldoDisponible = 4500.0
+    val celular = "3053715482" // Número de celular predefinido (ejemplo)
+    val clave = "2005" // Clave de acceso predefinida (ejemplo)
+    var saldoDisponible = 1000000.0
 
     fun iniciar() {
         var intentos = 3
         while (intentos > 0) {
-            println("Ingrese número de celular:")
+            println("¡Hola! Bienvenido a Nequi.")
+            println("Ingrese su número de celular:")
             val celularInput = readLine()
-            println("Ingrese clave de 4 dígitos:")
+            println("Ingrese su clave de 4 dígitos:")
             val claveInput = readLine()
 
             if (celular == celularInput && clave == claveInput) {
-                println("¡Bienvenido a Nequi!")
+                println("¡Bienvenido de nuevo! Acceso concedido.")
                 mostrarSaldo()
 
                 while (true) {
@@ -25,7 +28,10 @@ class Nequi {
                         1 -> sacar()
                         2 -> enviar()
                         3 -> recargar()
-                        4 -> return
+                        4 -> {
+                            println("Gracias por usar Nequi. Hasta luego.")
+                            return
+                        }
                         else -> println("Opción inválida, por favor ingrese una opción válida.")
                     }
                 }
@@ -47,14 +53,15 @@ class Nequi {
         println("----------------------------")
     }
 
-    private fun mostrarSaldo() {
+    fun mostrarSaldo() {
         println("Saldo disponible: $saldoDisponible")
     }
 
-    private fun sacar() {
+    fun sacar() {
         if (saldoDisponible < 2000) {
             println("No te alcanza para realizar el retiro.")
         } else {
+            println("Elige una opción:")
             println("1. Cajero")
             println("2. Punto físico")
             val opcion = readLine()?.toIntOrNull()
@@ -76,7 +83,7 @@ class Nequi {
         mostrarSaldo()
     }
 
-    private fun enviar() {
+    fun enviar() {
         println("Ingrese el número de teléfono al que desea enviar dinero:")
         val numeroTelefono = readLine()
         println("Ingrese el valor a enviar:")
@@ -91,7 +98,7 @@ class Nequi {
         mostrarSaldo()
     }
 
-    private fun recargar() {
+    fun recargar() {
         println("Ingrese el valor a recargar:")
         val valorRecarga = readLine()?.toDoubleOrNull()
 
@@ -112,8 +119,7 @@ class Nequi {
     }
 
     private fun generarCodigoRetiro(): Int {
-        // Generar código de 6 dígitos para el retiro (ejemplo)
-        return (100000..999999).random()
+        return Random.nextInt(100000, 999999)
     }
 }
 
