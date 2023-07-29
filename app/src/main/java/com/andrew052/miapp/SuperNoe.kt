@@ -6,19 +6,19 @@ fun obtenerDescuento(bolita: String, valorCompra: Double): Pair<Double, Double> 
     val descuento: Double
     when (bolita) {
         "roja" -> {
-            descuento = 0.1 // 10% de descuento
+            descuento = 0.1
         }
         "azul" -> {
-            descuento = 0.3 // 30% de descuento
+            descuento = 0.3
         }
         "amarilla" -> {
-            descuento = 0.5 // 50% de descuento
+            descuento = 0.5
         }
         "blanca" -> {
-            descuento = 1.0 // 100% de descuento (compra gratis)
+            descuento = 1.0
         }
         else -> {
-            descuento = 0.0 // Sin descuento
+            descuento = 0.0
         }
     }
 
