@@ -2,10 +2,11 @@ package com.andrew052.miapp
 
 import kotlin.random.Random
 
+
 class Nequi {
-    val celular = "3053715482" // Número de celular predefinido (ejemplo)
-    val clave = "2005" // Clave de acceso predefinida (ejemplo)
-    var saldoDisponible = 1000000.0
+    private val celular = "3053715482" // Número de celular predefinido (ejemplo)
+    private val clave = "2005" // Clave de acceso predefinida (ejemplo)
+    private var saldoDisponible = 500000.0
 
     fun iniciar() {
         var intentos = 3
@@ -13,10 +14,10 @@ class Nequi {
             println("¡Hola! Bienvenido a Nequi.")
             println("Ingrese su número de celular:")
             val celularInput = readLine()
-            println("Ingrese su clave de 4 dígitos:")
-            val claveInput = readLine()
+            println("Ingrese su contraseña de 4 dígitos:")
+            val contrasena = readLine()
 
-            if (celular == celularInput && clave == claveInput) {
+            if (celular == celularInput && clave == contrasena) {
                 println("¡Bienvenido de nuevo! Acceso concedido.")
                 mostrarSaldo()
 
@@ -28,7 +29,9 @@ class Nequi {
                         1 -> sacar()
                         2 -> enviar()
                         3 -> recargar()
-                        4 -> {
+                        4 -> donar()
+                        5 -> pagarServicioPublico()
+                        6 -> {
                             println("Gracias por usar Nequi. Hasta luego.")
                             return
                         }
@@ -44,12 +47,14 @@ class Nequi {
         println("Ha excedido el número máximo de intentos. La aplicación se cerrará.")
     }
 
-    private fun mostrarMenu() {
+    fun mostrarMenu() {
         println("----- Menú de opciones -----")
         println("1. Sacar")
         println("2. Enviar")
         println("3. Recargar")
-        println("4. Salir")
+        println("4. Donar")
+        println("5. Pagar servicio público")
+        println("6. Salir")
         println("----------------------------")
     }
 
@@ -118,7 +123,48 @@ class Nequi {
         mostrarSaldo()
     }
 
-    private fun generarCodigoRetiro(): Int {
+    fun donar() {
+        println("Ingrese el valor a donar:")
+        val valorDonacion = readLine()?.toDoubleOrNull()
+
+        if (valorDonacion != null && valorDonacion <= saldoDisponible) {
+            println("¿Desea confirmar la donación de $valorDonacion? (Sí/No)")
+            val confirmacion = readLine()
+
+            if (confirmacion?.equals("Sí", true) == true) {
+                saldoDisponible -= valorDonacion
+                println("¡Gracias por tu generosidad! Donación exitosa. Nuevo saldo disponible: $saldoDisponible")
+            } else {
+                println("Donación cancelada.")
+            }
+        } else {
+            println("Valor inválido o saldo insuficiente para realizar la donación.")
+        }
+        mostrarSaldo()
+
+    }
+
+    fun pagarServicioPublico() {
+        println("Ingrese el valor a pagar por el servicio público:")
+        val valorPagar = readLine()?.toDoubleOrNull()
+
+        if (valorPagar != null && valorPagar <= saldoDisponible) {
+            println("¿Desea confirmar el pago de $valorPagar por el servicio público? (Sí/No)")
+            val confirmacion = readLine()
+
+            if (confirmacion?.equals("Sí", true) == true) {
+                saldoDisponible -= valorPagar
+                println("Pago exitoso. Nuevo saldo disponible: $saldoDisponible")
+            } else {
+                println("Pago cancelado.")
+            }
+        } else {
+            println("Valor inválido o saldo insuficiente para realizar el pago del servicio público.")
+        }
+        mostrarSaldo()
+    }
+
+    fun generarCodigoRetiro(): Int {
         return Random.nextInt(100000, 999999)
     }
 }
