@@ -4,8 +4,8 @@ import kotlin.random.Random
 
 
 class Nequi {
-    private val celular = "3053715482" // Número de celular predefinido (ejemplo)
-    private val clave = "2005" // Clave de acceso predefinida (ejemplo)
+    private val celular = "3053715482"
+    private val clave = "2005"
     private var saldoDisponible = 500000.0
 
     fun iniciar() {
